@@ -1,0 +1,477 @@
+{
+	"info": {
+		"_postman_id": "f7a5ea80-9884-405f-96e2-83bf36ae7c64",
+		"name": "Cerdian-Somedico-Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"awad\",\r\n    \"password\":\"mal\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://somedico-pharmacy.com/user/authenticate",
+					"protocol": "https",
+					"host": [
+						"somedico-pharmacy",
+						"com"
+					],
+					"path": [
+						"user",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Suppliers - Forbidden",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"pm.test(\"Forbidden and access denied\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Forbidden\");\r",
+							"    pm.expect(jsonData.message).to.eql(\"Access Denied\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://somedico-pharmacy.com/supplier/filter?supplierName=&pageNumber=0&pageSize=20&sortOrder=ASC&sortBy=supplierName",
+					"protocol": "https",
+					"host": [
+						"somedico-pharmacy",
+						"com"
+					],
+					"path": [
+						"supplier",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "supplierName",
+							"value": ""
+						},
+						{
+							"key": "pageNumber",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "20"
+						},
+						{
+							"key": "sortOrder",
+							"value": "ASC"
+						},
+						{
+							"key": "sortBy",
+							"value": "supplierName"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Suppliers - Ok",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Content-Type application/json is present\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eq('application/json');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhd2FkIiwicm9sZXMiOlsiQURNSU4iXSwiZXhwIjoxNjI2MDE5NjU1LCJpYXQiOjE2MjU5ODM2NTV9.YiiDjuMMauAfY7JrybTXLZPHvlbf7B043jFDMxph55M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://somedico-pharmacy.com/supplier/filter?supplierName=&pageNumber=0&pageSize=20&sortOrder=ASC&sortBy=supplierName",
+					"protocol": "https",
+					"host": [
+						"somedico-pharmacy",
+						"com"
+					],
+					"path": [
+						"supplier",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "supplierName",
+							"value": ""
+						},
+						{
+							"key": "pageNumber",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "20"
+						},
+						{
+							"key": "sortOrder",
+							"value": "ASC"
+						},
+						{
+							"key": "sortBy",
+							"value": "supplierName"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Doctors - Bad Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhd2FkIiwicm9sZXMiOlsiQURNSU4iXSwiZXhwIjoxNjI2MDE5NjU1LCJpYXQiOjE2MjU5ODM2NTV9.YiiDjuMMauAfY7JrybTXLZPHvlbf7B043jFDMxph55M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"Trafalgar\",\r\n  \"lastName\": \"Law\",\r\n  \"address\": \"Rose-Hill\",\r\n  \"telephoneNumber\": 9999999,\r\n  \"createdBy\": {\r\n    \"age\": null,\r\n    \"email\": null,\r\n    \"firstName\": null,\r\n    \"lastName\": null,\r\n    \"password\": null,\r\n    \"phone\": null,\r\n    \"roles\": null,\r\n    \"userId\": 1,\r\n    \"username\": null,\r\n    \"createdDate\": null\r\n  },\r\n  \"lastModifiedBy\": {\r\n    \"age\": null,\r\n    \"email\": null,\r\n    \"firstName\": null,\r\n    \"lastName\": null,\r\n    \"password\": null,\r\n    \"phone\": null,\r\n    \"roles\": null,\r\n    \"userId\": 1,\r\n    \"username\": null\r\n  },\r\n  \"lastModifiedDate\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://somedico-pharmacy.com/doctor/save-doctors",
+					"protocol": "https",
+					"host": [
+						"somedico-pharmacy",
+						"com"
+					],
+					"path": [
+						"doctor",
+						"save-doctors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Doctors - Ok",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Doctors saved successfully! --> Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Doctors saved successfully!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhd2FkIiwicm9sZXMiOlsiQURNSU4iXSwiZXhwIjoxNjI2MDE5NjU1LCJpYXQiOjE2MjU5ODM2NTV9.YiiDjuMMauAfY7JrybTXLZPHvlbf7B043jFDMxph55M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"firstName\": \"Sarah\",\r\n        \"lastName\": \"Daniels\",\r\n        \"address\": \"Rose-Hill\",\r\n        \"telephoneNumber\": 9999999,\r\n        \"createdBy\": {\r\n            \"age\": null,\r\n            \"email\": null,\r\n            \"firstName\": null,\r\n            \"lastName\": null,\r\n            \"password\": null,\r\n            \"phone\": null,\r\n            \"roles\": null,\r\n            \"userId\": 1,\r\n            \"username\": null,\r\n            \"createdDate\": null\r\n        },\r\n        \"lastModifiedBy\": {\r\n            \"age\": null,\r\n            \"email\": null,\r\n            \"firstName\": null,\r\n            \"lastName\": null,\r\n            \"password\": null,\r\n            \"phone\": null,\r\n            \"roles\": null,\r\n            \"userId\": 1,\r\n            \"username\": null\r\n        },\r\n        \"lastModifiedDate\": null\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://somedico-pharmacy.com/doctor/save-doctors",
+					"protocol": "https",
+					"host": [
+						"somedico-pharmacy",
+						"com"
+					],
+					"path": [
+						"doctor",
+						"save-doctors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Dotor - Server Error",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Doctor not found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"doctor.not.found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhd2FkIiwicm9sZXMiOlsiQURNSU4iXSwiZXhwIjoxNjI2MDE5NjU1LCJpYXQiOjE2MjU5ODM2NTV9.YiiDjuMMauAfY7JrybTXLZPHvlbf7B043jFDMxph55M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"doctorId\": 9,\r\n  \"firstName\": \"Trafalgar\",\r\n  \"lastName\": \"Law\",\r\n  \"telephoneNumber\": \"567911020\",\r\n  \"address\": \"Curepipe\",\r\n  \"lastModifiedBy\": {\r\n    \"age\": null,\r\n    \"email\": null,\r\n    \"firstName\": null,\r\n    \"lastName\": null,\r\n    \"password\": null,\r\n    \"phone\": null,\r\n    \"roles\": null,\r\n    \"userId\": 1,\r\n    \"username\": null\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://somedico-pharmacy.com/doctor/edit-doctor",
+					"protocol": "https",
+					"host": [
+						"somedico-pharmacy",
+						"com"
+					],
+					"path": [
+						"doctor",
+						"edit-doctor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Doctor - Ok",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Doctor edited successfully! --> Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Doctor edited successfully!\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhd2FkIiwicm9sZXMiOlsiQURNSU4iXSwiZXhwIjoxNjI2MDE5NjU1LCJpYXQiOjE2MjU5ODM2NTV9.YiiDjuMMauAfY7JrybTXLZPHvlbf7B043jFDMxph55M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"doctorId\": 2,\r\n  \"firstName\": \"Trafalgar\",\r\n  \"lastName\": \"Law\",\r\n  \"telephoneNumber\": \"567911020\",\r\n  \"address\": \"Curepipe\",\r\n  \"lastModifiedBy\": {\r\n    \"age\": null,\r\n    \"email\": null,\r\n    \"firstName\": null,\r\n    \"lastName\": null,\r\n    \"password\": null,\r\n    \"phone\": null,\r\n    \"roles\": null,\r\n    \"userId\": 1,\r\n    \"username\": null\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://somedico-pharmacy.com/doctor/edit-doctor",
+					"protocol": "https",
+					"host": [
+						"somedico-pharmacy",
+						"com"
+					],
+					"path": [
+						"doctor",
+						"edit-doctor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Doctors - Ok",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Content-Type application/json is present\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eq('application/json');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhd2FkIiwicm9sZXMiOlsiQURNSU4iXSwiZXhwIjoxNjI2MDE5NjU1LCJpYXQiOjE2MjU5ODM2NTV9.YiiDjuMMauAfY7JrybTXLZPHvlbf7B043jFDMxph55M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://somedico-pharmacy.com/doctor/filter?name=&pageNumber=0&pageSize=20&sortOrder=ASC&sortBy=lastName",
+					"protocol": "https",
+					"host": [
+						"somedico-pharmacy",
+						"com"
+					],
+					"path": [
+						"doctor",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": ""
+						},
+						{
+							"key": "pageNumber",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "20"
+						},
+						{
+							"key": "sortOrder",
+							"value": "ASC"
+						},
+						{
+							"key": "sortBy",
+							"value": "lastName"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
